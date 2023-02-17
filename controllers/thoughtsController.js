@@ -10,18 +10,18 @@ module.exports = {
       res.status(500).json(err)
     }
   },
-  findAll: async function(req, res) {
+  find: async function(req, res) {
     try {
-      const thoughts = await Thought.find()
-      res.json(thoughts)
+      const result = await Thought.find()
+      res.json(result)
     } catch(err) {
       res.status(500).json(err)
     }
   },
   findOne: async function(req, res) {
     try {
-      const thought = await Thought.findById(req.params.id)
-      res.json(thought)
+      const result = await Thought.findById(req.params.id)
+      res.json(result)
     } catch(err) {
       res.status(500).json(err)
     }
@@ -50,7 +50,7 @@ module.exports = {
       res.status(500).json(err)
     }
   },
-  deleteReaction: async function(req, res) {
+  removeReaction: async function(req, res) {
     try {
       const result = await Thought.findByIdAndUpdate(req.params.thoughtId, { $pull: { reactions: {reactionID: req.params.reactionId} }}, { new: true })
       res.json(result)
